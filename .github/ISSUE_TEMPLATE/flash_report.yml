@@ -1,0 +1,66 @@
+name: Flash report
+description: Tell others how flashing your YT-K606F went (success or brick)
+title: "[Flash report] <from build> -> <to build>: <success/fail>"
+labels: ["flash-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Please do **not** paste your serial number, MAC addresses or raw `fpinfo`/`persist` dumps.
+        `scripts/fpinfo_inspect.py` output is safe to paste (it masks them).
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Success — boots fine
+        - Boots with issues
+        - Soft brick — recovered via EDL
+        - Hard brick / not recovered
+    validations:
+      required: true
+  - type: input
+    id: from
+    attributes:
+      label: Starting firmware (ro.build.display.id)
+      placeholder: YT-K606F_S200021_210415_ROW
+    validations:
+      required: true
+  - type: input
+    id: to
+    attributes:
+      label: Flashed firmware
+      placeholder: YT-K606F_S510234_231224_ROW
+    validations:
+      required: true
+  - type: dropdown
+    id: hardware
+    attributes:
+      label: Hardware (ro.boot.countrycode / ro.product.name)
+      options:
+        - CN (CNXX / LenovoYT-K606F_PRC)
+        - ROW / global
+        - Not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: region
+    attributes:
+      label: fpinfo region byte 0xE9 before flashing
+      options:
+        - "00 (unbound)"
+        - "01 (ROW)"
+        - "02 (CN) — patched to 01"
+        - "02 (CN) — not patched"
+        - Didn't check
+  - type: input
+    id: host
+    attributes:
+      label: Host OS and tools
+      placeholder: Windows 11, QPST 2.7.496, WHQL qcser 2.1.1.0, fh_loader / QFIL
+  - type: textarea
+    id: notes
+    attributes:
+      label: What happened / errors
+      description: Paste relevant QFIL / fh_loader log lines (ERROR, NAK, Sahara).
+      render: text
