@@ -1,0 +1,14 @@
+# never commit firmware or device dumps (serial numbers, MACs, calibration)
+*.zip
+*.7z
+*.img
+*.bin
+*.elf
+*.mbn
+*.cab
+backups/
+firmware/
+logs/
+*.log
+port_trace.txt
+__pycache__/
