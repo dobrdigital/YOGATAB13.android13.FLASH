@@ -244,8 +244,32 @@ flowchart LR
 
 ## 🖥️ Как это выглядит
 
-Реальный вывод с проверенного планшета (серийник замаскирован): см. блок [«What it looks like»](#️-what-it-looks-like) выше. Команды
-и результат одинаковы для обоих языков.
+Реальный вывод с проверенного планшета (серийник замаскирован):
+
+```
+PS> scripts\edl_enter_and_sahara.ps1 -Programmer firmware\S510234\prog_firehose_ddr.elf
+adb reboot edl
+EDL port: COM4
+File transferred successfully · Sahara protocol completed
+
+PS> python scripts\gpt_compare.py --device backups\gpt --package firmware\S510234
+LUN0: device 18 / package 18 partitions, differences: 1
+   DIFF (0, 'userdata', (1790760, 61933562), (1790760, 1790759))   <- заглушка, патчится
+LUN1..LUN5: differences: 0
+RESULT: OK
+
+PS> python scripts\fpinfo_inspect.py backups\partitions\fpinfo.bin
+country code (0x00): CNXX
+model        (0x14): LenovoYT-K606F_PRC
+serial       (0xAA): 8SSP*******************
+REGION       (0xE9): 00  -> unbound (00)        <- можно сразу шить ROW
+
+PS> scripts\flash_firmware.ps1 -Port COM4 -FirmwareDir firmware\S510234
+Sending <setbootablestoragedrive>
+{All Finished Successfully}
+Overall to target 175.953 seconds (38.99 MBps)
+ERROR/NAK lines: 0
+```
 
 ## 🧭 9 шагов
 
