@@ -59,7 +59,7 @@ All of it was proven on a real unit: **0 errors, Android 13 boots.**
 ## 🗺️ How it flows
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["📱 adb getprop<br/>CN hardware?<br/>seller build?"] --> B["🔌 WHQL 9008<br/>driver"]
     B --> C["📦 Firmware<br/>S510234 + SHA-256"]
     C --> D["⚡ adb reboot edl<br/>+ Sahara"]
@@ -229,7 +229,7 @@ Flashing voids warranty and is at your own risk.
 ## 🗺️ Как это устроено
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["📱 adb getprop<br/>китайское железо?<br/>прошивка продавца?"] --> B["🔌 WHQL-драйвер<br/>9008"]
     B --> C["📦 Прошивка<br/>S510234 + SHA-256"]
     C --> D["⚡ adb reboot edl<br/>+ Sahara"]
